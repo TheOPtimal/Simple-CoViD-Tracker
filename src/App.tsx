@@ -132,14 +132,6 @@ function App() {
     );
   }
 
-  function Container({ children }: { children: any }) {
-    return (
-      <div className="container" style={{ backgroundColor: bgColor }}>
-        {children}
-      </div>
-    );
-  }
-
   function setStat() {
     getStat(setModalVisibility).then((data) => {
       const latestData = ((data as unknown) as string[])[
