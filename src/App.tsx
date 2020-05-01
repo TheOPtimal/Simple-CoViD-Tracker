@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { default as axios } from "axios";
 import * as Papa from "papaparse";
+import Loading from "./Loading";
 
 function getStat() {
   return new Promise((resolve) => {
@@ -33,7 +34,7 @@ function InfoPart({
   utctime?: boolean;
 }) {
   if (utctime) {
-    const date = new Date(num*1000);
+    const date = new Date(num * 1000);
     num = date.toLocaleString();
   }
   return (
@@ -49,6 +50,7 @@ function App() {
   const [positive, setPositive] = useState(0);
   const [deaths, setDeaths] = useState(0);
   const [time, setTime] = useState(0);
+  const [modalVisibility, setModalVisibility] = useState(false)
   setStat();
   setInterval(setStat, 40000);
   return (
@@ -61,6 +63,7 @@ function App() {
         This is stats for New York City, not the entire world. Stay home, wash
         your hands and practice social distancing.
       </footer>
+      <Loading visibility={modalVisibility} />
     </div>
   );
 
