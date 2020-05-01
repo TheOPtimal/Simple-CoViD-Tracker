@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+html, body, #root, .container {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.tested, .positive, .deaths {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.tested-text, .positive-text, .deaths-text {
+  font-size: 60px;
+  color: rgb(0, 153, 153);
+}
+.tested-number, .positive-number, .deaths-number {
+  margin-top: 40px;
+  font-size: 30px;
+}
+
+footer {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+}
