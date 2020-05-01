@@ -183,7 +183,7 @@ function App() {
         This is stats for New York City, not the entire world. Stay home, wash
         your hands and practice social distancing.
       </footer>
-      {/* <Loading visibility={modalVisibility} /> */}
+      <Loading visibility={modalVisibility} />
     </div>
   );
 };
