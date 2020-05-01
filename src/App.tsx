@@ -14,11 +14,28 @@ function getStat() {
       .then((data) => {
         const parsedData = Papa.parse(data.data);
         resolve(parsedData.data as string[]);
+      })
+      .catch((err) => {
+        console.error(
+          "It looks like the hourly quota has been reached. Check back in 60 minutes or use ngrok."
+        );
       });
   });
 }
 
-function InfoPart({ text, num }: { text: string; num: number }) {
+function InfoPart({
+  text,
+  num,
+  utctime = false,
+}: {
+  text: string;
+  num: any;
+  utctime?: boolean;
+}) {
+  if (utctime) {
+    const date = new Date(num*1000);
+    num = date.toLocaleString();
+  }
   return (
     <span className="info-container">
       <span className="info-text">{text}</span>
@@ -31,10 +48,12 @@ function App() {
   const [tested, setTested] = useState(0);
   const [positive, setPositive] = useState(0);
   const [deaths, setDeaths] = useState(0);
+  const [time, setTime] = useState(0);
   setStat();
-  setInterval(setStat, 15000);
+  setInterval(setStat, 40000);
   return (
     <div className="container">
+      <InfoPart text="Time recorded:" num={time} utctime={true} />
       <InfoPart text="Tested:" num={tested} />
       <InfoPart text="Positive:" num={positive} />
       <InfoPart text="Deaths:" num={deaths} />
@@ -50,6 +69,7 @@ function App() {
       const latestData = ((data as unknown) as string[])[
         (data as string[]).length - 1
       ];
+      setTime(parseInt(latestData[0]));
       setTested(parseInt(latestData[1]));
       setPositive(parseInt(latestData[2]));
       setDeaths(parseInt(latestData[3]));
