@@ -18,6 +18,15 @@ function getStat() {
   });
 }
 
+function InfoPart({ text, num }: { text: string; num: number }) {
+  return (
+    <span className="info-container">
+      <span className="info-text">{text}</span>
+      <span className="info-number">{num}</span>
+    </span>
+  );
+}
+
 function App() {
   const [tested, setTested] = useState(0);
   const [positive, setPositive] = useState(0);
@@ -26,18 +35,9 @@ function App() {
   setInterval(setStat, 15000);
   return (
     <div className="container">
-      <span className="tested">
-        <span className="tested-text">Tested:</span>
-        <span className="tested-number">{tested}</span>
-      </span>
-      <span className="positive">
-        <span className="positive-text">Positive:</span>
-        <span className="positive-number">{positive}</span>
-      </span>
-      <span className="deaths">
-        <span className="deaths-text">Deaths:</span>
-        <span className="positive-number">{deaths}</span>
-      </span>
+      <InfoPart text="Tested:" num={tested} />
+      <InfoPart text="Positive:" num={positive} />
+      <InfoPart text="Deaths:" num={deaths} />
       <footer>
         This is stats for New York City, not the entire world. Stay home, wash
         your hands and practice social distancing.
