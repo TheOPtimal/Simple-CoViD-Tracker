@@ -25,6 +25,7 @@ body,
   align-items: center;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  height: 90%;
 }
 
 .info-container {
@@ -57,5 +58,17 @@ footer {
   cursor: pointer;
 }
 * {
-	transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+@media only screen and (max-width: 600px) {
+  .info-text {
+    font-size: 35px;
+  }
+  .container {
+    flex-direction: column;
+  }
+  .info-number {
+    margin-top: 20px;
+  }
 }
