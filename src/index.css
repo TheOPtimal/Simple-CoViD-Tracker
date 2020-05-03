@@ -20,7 +20,7 @@ body,
   height: 100%;
 }
 
-.container {
+.if-part-container {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -46,6 +46,9 @@ footer {
   position: absolute;
   bottom: 10px;
   text-align: center;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
 }
 
 .darkModeButtonContainer {
@@ -65,7 +68,7 @@ footer {
   .info-text {
     font-size: 35px;
   }
-  .container {
+  .if-part-container {
     flex-direction: column;
   }
   .info-number {

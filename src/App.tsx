@@ -93,9 +93,8 @@ function App() {
   useEffect(() => {
     DarkLoad();
     setStat();
-  })
+  });
   useInterval(setStat, 40000);
-
 
   function DarkLoad() {
     if (themeMode === "dark") {
@@ -146,31 +145,33 @@ function App() {
   return (
     <div className="container" style={{ backgroundColor: bgColor }}>
       <DarkModeToggle />
-      <InfoPart
-        text="Time recorded:"
-        num={time}
-        utctime={true}
-        themeColor={themeColor}
-        textColor={textColor}
-      />
-      <InfoPart
-        text="Tested:"
-        num={tested}
-        themeColor={themeColor}
-        textColor={textColor}
-      />
-      <InfoPart
-        text="Positive:"
-        num={positive}
-        themeColor={themeColor}
-        textColor={textColor}
-      />
-      <InfoPart
-        text="Deaths:"
-        num={deaths}
-        themeColor={themeColor}
-        textColor={textColor}
-      />
+      <div className="if-part-container">
+        <InfoPart
+          text="Time recorded:"
+          num={time}
+          utctime={true}
+          themeColor={themeColor}
+          textColor={textColor}
+        />
+        <InfoPart
+          text="Tested:"
+          num={tested}
+          themeColor={themeColor}
+          textColor={textColor}
+        />
+        <InfoPart
+          text="Positive:"
+          num={positive}
+          themeColor={themeColor}
+          textColor={textColor}
+        />
+        <InfoPart
+          text="Deaths:"
+          num={deaths}
+          themeColor={themeColor}
+          textColor={textColor}
+        />
+      </div>
       <footer style={{ color: textColor }}>
         This is stats for New York City, not the entire world. Stay home, wash
         your hands and practice social distancing.
@@ -178,6 +179,6 @@ function App() {
       <Loading visibility={modalVisibility} />
     </div>
   );
-};
+}
 
 export default App;
