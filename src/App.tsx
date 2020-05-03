@@ -110,6 +110,7 @@ function App() {
     return (
       <div
         className="darkModeButtonContainer"
+        data-testid="darkmode-button"
         onClick={() => {
           if (themeMode === "light") {
             setThemeMode("dark");
