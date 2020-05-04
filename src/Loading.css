@@ -1,3 +1,5 @@
+@import url("https://css.gg/close.css");
+
 .lds-spinner {
   display: inline-block;
   position: relative;
@@ -77,6 +79,8 @@
 }
 
 .modal-bg {
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -88,6 +92,7 @@
 
 .modal-box {
   display: flex;
+  position: relative;
 
   align-items: center;
   justify-content: center;
@@ -98,6 +103,7 @@
   flex-direction: column;
   width: 30%;
   height: 30%;
+  box-shadow: 0px 0px 45px black;
 }
 
 .modal-text {
@@ -109,4 +115,11 @@
   .modal-text {
     font-size: 150%;
   }
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
