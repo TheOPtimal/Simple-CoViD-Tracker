@@ -80,7 +80,7 @@ function App() {
   const [deaths, setDeaths] = useState(0);
   const [time, setTime] = useState(0);
   const [modalVisibility, setModalVisibility] = useState(false);
-  const [bgColor, setBgColor] = useState<"white" | "black">("white");
+  const [bgColor, setBgColor] = useState<"white" | "#1a1a1a">("white");
   const [textColor, setTextColor] = useState<"white" | "black">("black");
   const [themeColor, setThemeColor] = useState<
     "rgb(0, 153, 153)" | "rgb(0, 200, 200)"
@@ -101,7 +101,7 @@ function App() {
       setThemeMode("dark");
       setThemeColor("rgb(0, 200, 200)");
       setTextColor("white");
-      setBgColor("black");
+      setBgColor("#1a1a1a");
       localStorage.setItem("theme", "dark");
     }
   }
@@ -116,7 +116,7 @@ function App() {
             setThemeMode("dark");
             setThemeColor("rgb(0, 200, 200)");
             setTextColor("white");
-            setBgColor("black");
+            setBgColor("#1a1a1a");
             localStorage.setItem("theme", "dark");
           } else if (themeMode === "dark") {
             setThemeMode("light");
