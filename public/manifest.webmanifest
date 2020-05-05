@@ -1,0 +1,27 @@
+{
+  "short_name": "CoViD-19 Tracker",
+  "name": "Simple COViD-19 Tracker",
+  "description": "Simple COViD-19 Tracker",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "256x256",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "covid-19-1.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "covid-19-0.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "scope": "/"
+}
