@@ -3,6 +3,60 @@ import { default as axios } from "axios";
 import * as Papa from "papaparse";
 import Loading from "./Loading";
 
+type UState =
+  | "ak"
+  | "al"
+  | "ar"
+  | "az"
+  | "ca"
+  | "co"
+  | "ct"
+  | "dc"
+  | "de"
+  | "fl"
+  | "ga"
+  | "hi"
+  | "ia"
+  | "id"
+  | "il"
+  | "in"
+  | "ks"
+  | "ky"
+  | "la"
+  | "ma"
+  | "md"
+  | "me"
+  | "mi"
+  | "mn"
+  | "mo"
+  | "ms"
+  | "mt"
+  | "nc"
+  | "nd"
+  | "ne"
+  | "nh"
+  | "nj"
+  | "nm"
+  | "nv"
+  | "ny"
+  | "oh"
+  | "ok"
+  | "or"
+  | "pa"
+  | "pr"
+  | "ri"
+  | "sc"
+  | "sd"
+  | "tn"
+  | "tx"
+  | "ut"
+  | "va"
+  | "vt"
+  | "wa"
+  | "wi"
+  | "wv"
+  | "wy";
+
 function useInterval(callback: () => any, delay: number) {
   const savedCallback = useRef(callback);
 
@@ -23,11 +77,11 @@ function useInterval(callback: () => any, delay: number) {
   }, [delay]);
 }
 
-function getStat(setModalVisibility: any) {
-  return new Promise((resolve) => {
+function getStat(setModalVisibility: any, usState: string) {
+  return new Promise((resolve, reject) => {
     axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://coronavirusapi.com/getTimeSeries/ny",
+        `https://cors-anywhere.herokuapp.com/https://coronavirusapi.com/getTimeSeries/${usState}`,
         {
           responseType: "text",
         }
@@ -35,12 +89,14 @@ function getStat(setModalVisibility: any) {
       .then((data) => {
         const parsedData = Papa.parse(data.data);
         resolve(parsedData.data as string[]);
+        setModalVisibility(false);
       })
       .catch((err) => {
         console.error(
-          "It looks like the hourly quota has been reached. Check back in 60 minutes or use ngrok."
+          `It looks like the hourly quota has been reached. Check back in 60 minutes or use ngrok. ${err}`
         );
         setModalVisibility(true);
+        reject("Hourly Quota Reached");
       });
   });
 }
@@ -89,6 +145,7 @@ function App() {
   const [themeMode, setThemeMode] = useState<theme>(
     (localStorage.getItem("theme") as theme) || "light"
   );
+  const [message, setMessage] = useState<string>("ny");
 
   useEffect(() => {
     DarkLoad();
@@ -132,8 +189,41 @@ function App() {
     );
   }
 
+  function USState() {
+    return (
+      <>
+        {/* <form className="UStateButtonContainer" data-testid="ustate-button"> */}
+          <label
+            htmlFor="state-input"
+            style={{ position: "fixed", left: "-999999px" }}
+          >
+            Enter State
+          </label>
+          <input
+            name="state-input"
+            id="state-input"
+            type="text"
+            value={message}
+            // onChange={(event) => setMessage(event.target.value)}
+            onChange={event => setMessage(event.target.value)}
+          />
+          {/* <input
+            type="text"
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+            onKeyPress={(event) =>
+              event.key === "Enter" ? event.preventDefault() : null
+            }
+            placeholder="Type a message..."
+            className="input"
+          /> */}
+        {/* </form> */}
+      </>
+    );
+  }
+
   function setStat() {
-    getStat(setModalVisibility).then((data) => {
+    getStat(setModalVisibility, message).then((data) => {
       const latestData = ((data as unknown) as string[])[
         (data as string[]).length - 1
       ];
@@ -145,6 +235,7 @@ function App() {
   }
   return (
     <div className="container" style={{ backgroundColor: bgColor }}>
+      <USState />
       <DarkModeToggle />
       <div className="if-part-container">
         <InfoPart
@@ -174,10 +265,10 @@ function App() {
         />
       </div>
       <footer style={{ color: textColor }}>
-        This is stats for New York City, not the entire world. Stay home, wash
-        your hands and practice social distancing.
+        This is stats for the state on the top left corner, not the entire
+        world. Stay home, wash your hands and practice social distancing.
       </footer>
-      <Loading visibility={modalVisibility} setModalVisibility={setModalVisibility} />
+      <Loading visibility={modalVisibility} />
     </div>
   );
 }
