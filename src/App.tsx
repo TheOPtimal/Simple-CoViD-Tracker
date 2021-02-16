@@ -27,7 +27,7 @@ function getStat(setModalVisibility: any) {
   return new Promise((resolve) => {
     axios
       .get(
-        "https://cors-anywhere.herokuapp.com/https://coronavirusapi.com/getTimeSeries/ny",
+        "ttps://cors.bridged.cc/https://coronavirusapi.com/getTimeSeries/ny",
         {
           responseType: "text",
         }
@@ -177,7 +177,10 @@ function App() {
         This is stats for New York City, not the entire world. Stay home, wash
         your hands and practice social distancing.
       </footer>
-      <Loading visibility={modalVisibility} setModalVisibility={setModalVisibility} />
+      <Loading
+        visibility={modalVisibility}
+        setModalVisibility={setModalVisibility}
+      />
     </div>
   );
 }
